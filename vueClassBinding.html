@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title></title>
+	<style type="text/css">
+		
+		.complete {background-color:green; }
+		.incomplete {background-color: red;}
+	
+	</style>	
+</head>
+<body>
+<!-- create a list of tasks
+
+	 each task to have completed or incompleted status
+
+	 display the list of tasks on the page with completed and incompleted button
+
+	 buttons displayed with default color 
+
+	 when the user clicks the "completed button"	color turns to green , incompleted button color remains default
+
+	 if the user clicks the "incompleted button" color turns to red,  completed button color remains default
+
+	 if the user changes the task status button colors change automatically 
+
+	 the list of completed tasks and incompleted tasks is updated accordingly and displayed on the page
+
+
+	 -->
+	 <div id="root">
+	 	<h1> List of All Tasks is Displayed Here</h1>	
+
+		<ul>
+		 	
+		 	<li v-for="task in tasks">{{task.description}}    
+		 	
+		 		<button  @click="changeTaskStatusToComplete(task)" :class="{'complete':task.tabStatusComplete}"> completed </button> 
+		 	
+		 		<button  @click="changeTaskStatusToIncomplete(task)" :class="{'incomplete':task.tabStatusInComplete}"> not Complete </button> 
+
+		 	</li> 	
+
+		</ul>
+		 
+		<ul>
+		 	
+		 	<h1> List of Completed task </h1>
+	 		<li v-for="task in tasks" v-if="task.completed"> {{task.description}} </li>	
+
+		</ul>
+
+		<ul>
+		 	<h1> List of Incomplete task </h1>
+				<li v-for="task in tasks" v-if="!task.completed"> {{task.description}} </li>	
+	
+		</ul>
+	 </div>
+	 <script type="text/javascript" src="https://unpkg.com/vue@2.5.17/dist/vue.js"></script>
+
+	 <script type="text/javascript">
+	 	
+	 	new Vue({
+
+	 			el:"#root",
+	 			data:{
+	 					tasks:[
+	 						{"description":"go to the store","completed":true},
+	 						{"description":"call the cab","completed":false},
+	 						{"description":"go the park","completed":true},	
+	 						{"description":"call amruta","completed":true},
+	 						{"description":"meet friends","completed":false},
+	 						{"description":"car servicing","completed":false},
+	 						{"description":"inusrance buy","completed":false},
+	 					],
+	 					tabStatusComplete:"",
+	 					tabStatusInComplete:""
+	 				},
+	 			methods:{
+
+	 					changeTaskStatusToComplete(task){
+	 						
+	 						if(task.completed){
+
+	 							task.completed=true;
+	 						}	
+	 						else if (!task.completed){
+
+	 							task.completed= true;
+	 							task.tabStatusComplete= true;
+	 							task.tabStatusInComplete=false;
+	 						}
+	 						
+	 					},
+	 					changeTaskStatusToIncomplete(task){
+	 						
+	 						if(task.completed){
+
+	 							task.completed=false;
+	 							task.tabStatusInComplete= true;	
+	 								
+	 						}	
+	 						else if (!task.completed){
+
+	 							task.completed= false;
+	 							task.tabStatusInComplete= true;
+	 							task.tabStatusComplete=false;
+	 						}
+	 					}
+	 			}	
+	 	})
+
+
+
+
+
+
+
+	 </script>
+
+</body>
+</html>
